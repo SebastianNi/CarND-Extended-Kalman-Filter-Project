@@ -39,14 +39,13 @@ FusionEKF::FusionEKF() {
 
   // Initialize the mean state vector (contains information about the object's position and velocity)
   ekf_.x_ = VectorXd(4);
-  ekf_.x_ << 0, 0, 0, 0;
 
   // Initialize the state covariance matrix (contains the uncertainty of the object's position and velocity)
   ekf_.P_ = MatrixXd(4, 4);
   ekf_.P_ << 1, 0, 0, 0,
             0, 1, 0, 0,
-            0, 0, 10000, 0,
-            0, 0, 0, 10000;
+            0, 0, 1000, 0,
+            0, 0, 0, 1000;
 
   // Initialize the state transition matrix for prediction
   ekf_.F_ = MatrixXd(4, 4);
@@ -62,8 +61,8 @@ FusionEKF::FusionEKF() {
 
   // Initialize the covariance matrix for the measurement uncertainty (measurement noise)
   ekf_.R_ = MatrixXd(2, 2);
-  ekf_.R_ << 1, 0,
-            0, 1;
+  ekf_.R_ << 0.0225, 0,
+            0, 0.0225;
 
   // Initialize the process covariance matrix for the motion uncertainty (process noise)
   ekf_.Q_ = MatrixXd(4, 4);
